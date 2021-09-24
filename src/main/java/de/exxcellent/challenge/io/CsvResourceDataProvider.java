@@ -9,18 +9,19 @@ import java.nio.charset.Charset;
 import java.util.stream.Stream;
 
 public class CsvResourceDataProvider implements DataProvider<String, Stream<String>> {
-
-    public CsvResourceDataProvider(){
-
-    }
-
+    /**
+     * Method getInputData: Accepts a string identifying a file in the "Resources" Folder, tries to open said file and provide a stream of it's contents
+     * @param iD A path leading to the desired resources file from the package root
+     * @return A stream of lines read from the resource-file
+     * @throws Exception if Input file can't be read.
+     */
     @Override
     public Stream<String> getInputData(String iD) throws Exception {
-        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(iD);
-        if(inputStream.available() == 0){
+        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(iD); //open desired file as input stream
+        if(inputStream.available() == 0){ //check whether file is readable and not empty
             throw new Exception("Cannot read input file");
         }
-        return new BufferedReader(new InputStreamReader(inputStream, Charset.defaultCharset())).lines();
+        return new BufferedReader(new InputStreamReader(inputStream, Charset.defaultCharset())).lines(); // read file line by line and return a stream of read lines
 
     }
 }
