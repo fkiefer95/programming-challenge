@@ -1,8 +1,7 @@
-package de.exxcellent.challenge.applicationLogic;
+package de.exxcellent.challenge.applicationLogic.interactors;
 
 import de.exxcellent.challenge.dataModels.TableDataModel;
-import de.exxcellent.challenge.io.CsvResourceDataProvider;
-import de.exxcellent.challenge.io.DataProvider;
+import de.exxcellent.challenge.io.TableDataProvider;
 import de.exxcellent.challenge.parsers.Parser;
 
 import java.util.List;
@@ -21,12 +20,12 @@ public abstract class BaseTableInteractor<LineType> {
     /**
      * Method processDataStructure: Implementations of this method will load data from a source and examine it in order
      * to find the data-object which best fits a certain condition
-     * @param dataProvider A component which provides a {@link Stream} of {@link String}s representing the input data to
+     * @param tableDataProvider A component which provides a {@link Stream} of {@link String}s representing the input data to
      *                     be parsed and processed
      * @return A String identifying the data-object from the input data which best fits the given condition
      * @throws Exception if there is an error processing the data structure, e.g. invalid data
      */
-    public abstract String processDataStructure(DataProvider dataProvider) throws Exception;
+    public abstract String processDataStructure(TableDataProvider tableDataProvider) throws Exception;
 
     /**
      * This method takes a stream of Data (as {@link String}). For every object in the stream, the conversion to the

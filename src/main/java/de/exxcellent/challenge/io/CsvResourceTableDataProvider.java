@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.stream.Stream;
 
-public class CsvResourceDataProvider implements DataProvider {
+public class CsvResourceTableDataProvider implements TableDataProvider {
 
     private String resourceID = "";
 
@@ -16,7 +16,7 @@ public class CsvResourceDataProvider implements DataProvider {
      * Constructs an object of Class CsvResourceDataProvider
      * @param resourceID the Path to the file in the "resources" folder containing the desired data
      */
-    public CsvResourceDataProvider(String resourceID){
+    public CsvResourceTableDataProvider(String resourceID){
         this.resourceID = resourceID;
     }
 
