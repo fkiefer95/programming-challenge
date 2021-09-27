@@ -2,9 +2,9 @@ package de.exxcellent.challenge.applicationLogic;
 
 import de.exxcellent.challenge.applicationLogic.mathUtils.ValueComparator;
 
-public interface DataStructureProcessor<StructureLineType, ResultType> {
+public interface DataStructureProcessor<DataStructureType, ResultType> {
     ValueComparator comparator = null;
 
-    ResultType processDataStructure(StructureLineType data) throws Exception;
+    ResultType processDataStructure(DataStructureType data) throws Exception;
 
 }
