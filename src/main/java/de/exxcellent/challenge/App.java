@@ -1,5 +1,7 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.applicationLogic.WeatherTableInteractor;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -16,7 +18,14 @@ public final class App {
 
         // Your preparation code …
 
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
+        //String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
+        String dayWithSmallestTempSpread = "oh no";
+        try {
+            dayWithSmallestTempSpread = new WeatherTableInteractor()
+                    .processDataStructure("de/exxcellent/challenge/weather.csv");
+        } catch (Exception x){
+            x.printStackTrace();
+        }
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
         String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …

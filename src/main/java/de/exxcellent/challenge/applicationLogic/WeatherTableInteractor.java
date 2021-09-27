@@ -1,5 +1,6 @@
 package de.exxcellent.challenge.applicationLogic;
 
+import de.exxcellent.challenge.applicationLogic.mathUtils.WeatherValueCondition;
 import de.exxcellent.challenge.dataModels.TableDataModel;
 import de.exxcellent.challenge.dataModels.WeatherLineDataModel;
 import de.exxcellent.challenge.io.CsvResourceDataProvider;
@@ -12,6 +13,6 @@ public class WeatherTableInteractor extends BaseTableInteractor<WeatherLineDataM
         WeatherLineDataModel lineType[] = new WeatherLineDataModel[1];
         TableDataModel data = parseData(dataProvider.getInputData(resourcePath), lineType , new WeatherLineParser());
 
-        return "not quite yet...";
+        return new WeatherValueCondition().computeResult(data);
     }
 }

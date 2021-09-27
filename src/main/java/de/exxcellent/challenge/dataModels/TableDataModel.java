@@ -7,4 +7,8 @@ public class TableDataModel<LineType> {
         this.lines = lines;
     }
 
+    public LineType[] getLines(){
+        return this.lines;
+    }
+
 }
