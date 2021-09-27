@@ -1,9 +1,9 @@
 package de.exxcellent.challenge.dataModels;
 
-public class LineOfDoublesDataModel {
+public class WeatherLineDataModel {
     private double[] line;
 
-    public LineOfDoublesDataModel(double line[]){
+    public WeatherLineDataModel(double line[]){
         this.line = line;
     }
 
