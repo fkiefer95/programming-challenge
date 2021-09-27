@@ -1,6 +1,7 @@
 package de.exxcellent.challenge;
 
 import de.exxcellent.challenge.applicationLogic.WeatherTableInteractor;
+import de.exxcellent.challenge.io.CsvResourceDataProvider;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
@@ -22,7 +23,9 @@ public final class App {
         String dayWithSmallestTempSpread = "oh no";
         try {
             dayWithSmallestTempSpread = new WeatherTableInteractor()
-                    .processDataStructure("de/exxcellent/challenge/weather.csv");
+                    .processDataStructure(
+                            new CsvResourceDataProvider("de/exxcellent/challenge/weather.csv")
+                    );
         } catch (Exception x){
             x.printStackTrace();
         }

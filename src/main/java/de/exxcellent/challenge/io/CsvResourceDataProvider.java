@@ -8,16 +8,26 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.stream.Stream;
 
-public class CsvResourceDataProvider implements DataProvider<String, Stream<String>> {
+public class CsvResourceDataProvider implements DataProvider {
+
+    private String resourceID = "";
+
+    /**
+     * Constructs an object of Class CsvResourceDataProvider
+     * @param resourceID the Path to the file in the "resources" folder containing the desired data
+     */
+    public CsvResourceDataProvider(String resourceID){
+        this.resourceID = resourceID;
+    }
+
     /**
      * Method getInputData: Accepts a string identifying a file in the "Resources" Folder, tries to open said file and provide a stream of it's contents
-     * @param iD A path leading to the desired resources file from the package root
      * @return A stream of lines read from the resource-file
      * @throws Exception if Input file can't be read.
      */
     @Override
-    public Stream<String> getInputData(String iD) throws Exception {
-        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(iD); //open desired file as input stream
+    public Stream<String> getInputData() throws Exception {
+        InputStream inputStream = App.class.getClassLoader().getResourceAsStream(this.resourceID); //open desired file as input stream
         if(inputStream.available() == 0){ //check whether file is readable and not empty
             throw new Exception("Cannot read input file");
         }

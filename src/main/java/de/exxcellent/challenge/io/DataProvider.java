@@ -1,5 +1,8 @@
 package de.exxcellent.challenge.io;
 
-public interface DataProvider<DataResourceIdentifierType, OutputDataType> {
-    public OutputDataType getInputData(DataResourceIdentifierType iD ) throws Exception;
+import java.util.stream.Stream;
+
+public interface DataProvider{
+
+    public Stream<String> getInputData() throws Exception;
 }
