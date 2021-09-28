@@ -18,12 +18,11 @@ public class WeatherLineParser implements Parser<WeatherLineDataModel>{
      */
     @Override
     public WeatherLineDataModel parse(String data) throws Exception {
-        //create tokenizer for delimiter specified above
+        //split columns at delimiter specified above
         String columns[] = data.split(stringDelimiter);
-        int numberOfColumns = columns.length;
         List<Double> values = Arrays.stream(columns)
                 .map(st -> Double.parseDouble(st))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()); //collect values from columns in list
         return new WeatherLineDataModel(values.stream().mapToDouble(d -> d).toArray());
     }
 }
