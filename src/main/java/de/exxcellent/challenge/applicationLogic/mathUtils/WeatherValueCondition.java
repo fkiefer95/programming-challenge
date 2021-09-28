@@ -35,7 +35,10 @@ public class WeatherValueCondition implements ValueCondition<WeatherLineDataMode
             }
             previousLineLength = line.length;
             //compute temperature spread
-            double tempSpread = Math.abs(line[INDEX_MAX_TEMP]-line[INDEX_MIN_TEMP]); //compute temp spread
+            double tempSpread = line[INDEX_MAX_TEMP]-line[INDEX_MIN_TEMP]; //compute temp spread
+            if(tempSpread < 0.0){//Throw Exception if tempSpread is negative because this means that values are in wrong order
+                throw new Exception("Invalid Temperature data: Max Temp < Min Temp");
+            }
             //check for new minumum
             if( tempSpread < minTempSpread || index == 0){ //for first line or new minimum
                 minTempSpread = tempSpread;

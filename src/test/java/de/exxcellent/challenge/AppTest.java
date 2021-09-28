@@ -9,6 +9,7 @@ import de.exxcellent.challenge.io.TableDataProvider;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,15 +44,32 @@ class AppTest {
 
     @Test
     void testWeatherValueCondition(){
-        double[] data = {1,2,3};
+        //valid test data
+        double[] data = {1,3,2};
         WeatherLineDataModel[] lineModel = {new WeatherLineDataModel(data)};
         TableDataModel<WeatherLineDataModel> tableModel = new TableDataModel<>(lineModel);
         WeatherValueCondition weatherValueConditionTestCandidate = new WeatherValueCondition();
+        //invalid test data
+        double[] invalid_data = {1,2,3};
+        WeatherLineDataModel[] invalidLineModel = {new WeatherLineDataModel(invalid_data)};
+        TableDataModel<WeatherLineDataModel> invalidTableModel = new TableDataModel<>(invalidLineModel);
+
+        //run tests
+        boolean firstTestDone = false;
         try {
             assertEquals("1", weatherValueConditionTestCandidate.computeResult(tableModel), "Result incorrect");
+            firstTestDone = true;
+            assertThrows(Exception.class, new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    weatherValueConditionTestCandidate.computeResult(invalidTableModel);
+                }
+            },"Exception for invalid weather data was not thrown");
         } catch (Exception x){
-            x.printStackTrace();
-            fail("Exception thrown in WeatherValueCondition");
+            if(!firstTestDone) {
+                x.printStackTrace();
+                fail("Exception thrown in WeatherValueCondition");
+            }
         }
     }
 
@@ -74,7 +92,7 @@ class AppTest {
         boolean exception_thrown = false;
         WeatherTableInteractor weatherTableInteractor = new WeatherTableInteractor();
         ArrayList<String> testInput = new ArrayList<>();
-        testInput.add("1.0,3.0,3.5,4.0,5.0");
+        testInput.add("1.0,3.5,3.0,4.0,5.0");
         testInput.add("6.0,8.0,7.0,9.0,10.0");
         TableDataProvider testProvider = new TableDataProvider() {
             @Override
