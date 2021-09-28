@@ -19,16 +19,24 @@ public class WeatherValueCondition implements ValueCondition<WeatherLineDataMode
      * @return "Day" column of {@link WeatherLineDataModel} in Table with the lowest temperature spread
      */
     @Override
-    public String computeResult(TableDataModel<WeatherLineDataModel> data) {
+    public String computeResult(TableDataModel<WeatherLineDataModel> data) throws Exception {
         double minTempSpread = 0;
         int minTempSpreadIndex = 0;
+        int previousLineLength = 0;
 
         //iterate through the table line by line
         for(int index = 0; index < data.getLines().length; index++){
 
+            //get current line
             double line[] = data.getLines()[index].getLine(); //get values
+            //check whether all lines are the same length
+            if(index !=0 && line.length != previousLineLength){
+                throw new Exception("Line length Mismatch");
+            }
+            previousLineLength = line.length;
+            //compute temperature spread
             double tempSpread = line[INDEX_MAX_TEMP]-line[INDEX_MIN_TEMP]; //compute temp spread
-
+            //check for new minumum
             if( tempSpread < minTempSpread || index == 0){ //for first line or new minimum
                 minTempSpread = tempSpread;
                 minTempSpreadIndex = index; //save row number

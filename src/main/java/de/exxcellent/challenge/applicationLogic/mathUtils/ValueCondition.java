@@ -12,5 +12,5 @@ public interface ValueCondition<LineType> {
      * @param data The table which shall be examined
      * @return Some information on the row matching the implemented condition
      */
-    public String computeResult(TableDataModel<LineType> data);
+    public String computeResult(TableDataModel<LineType> data) throws Exception;
 }

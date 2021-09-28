@@ -31,7 +31,7 @@ public class CsvResourceTableDataProvider implements TableDataProvider {
         if(inputStream.available() == 0){ //check whether file is readable and not empty
             throw new Exception("Cannot read input file");
         }
-        return new BufferedReader(new InputStreamReader(inputStream, Charset.defaultCharset())).lines(); // read file line by line and return a stream of read lines
+        return new BufferedReader(new InputStreamReader(inputStream, Charset.defaultCharset())).lines().skip(1); // read file line by line and return a stream of read lines
 
     }
 }

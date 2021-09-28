@@ -39,7 +39,7 @@ public abstract class BaseTableInteractor<LineType> {
      */
     protected TableDataModel parseData(Stream<String> dataSource, LineType target[], Parser<LineType> parser) throws Exception {
 
-        List<LineType> result = dataSource.skip(1) //skip first line which contains the labels
+        List<LineType> result = dataSource
                 .map(st -> {//for every line in the stream:
                     try {
                         return parser.parse(st); //Parse the values into the desired format
