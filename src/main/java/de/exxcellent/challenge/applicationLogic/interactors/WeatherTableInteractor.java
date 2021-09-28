@@ -12,7 +12,6 @@ import de.exxcellent.challenge.parsers.WeatherLineParser;
  */
 public class WeatherTableInteractor extends BaseTableInteractor<WeatherLineDataModel>{
     /**
-     *
      * @param tableDataProvider A component which provides a {@link Stream} of {@link String}s representing the input data to
      *                     be parsed and processed
      * @return a string which solves the "weather-task"

@@ -1,7 +1,6 @@
 package de.exxcellent.challenge.parsers;
 
 import de.exxcellent.challenge.dataModels.FootballLineDataModel;
-import de.exxcellent.challenge.dataModels.WeatherLineDataModel;
 
 import java.util.Arrays;
 import java.util.List;

@@ -9,8 +9,8 @@ import de.exxcellent.challenge.dataModels.WeatherLineDataModel;
  */
 public class WeatherValueCondition implements ValueCondition<WeatherLineDataModel> {
     //column indices
-    private final int INDEX_MIN_TEMP =2;
-    private final int INDEX_MAX_TEMP =1;
+    private final int INDEX_MIN_TEMP = 2;
+    private final int INDEX_MAX_TEMP = 1;
     private final int INDEX_DAY_OF_MONTH = 0;
 
     /**

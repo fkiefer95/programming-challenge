@@ -1,5 +1,6 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.applicationLogic.interactors.FootballTableInteractor;
 import de.exxcellent.challenge.applicationLogic.interactors.WeatherTableInteractor;
 import de.exxcellent.challenge.io.CsvResourceTableDataProvider;
 
@@ -17,8 +18,8 @@ public final class App {
      */
     public static void main(String... args) {
 
-        String dayWithSmallestTempSpread = "";
-        String teamWithSmallestGoalSpread = "";
+        String dayWithSmallestTempSpread = "Error";
+        String teamWithSmallestGoalSpread = "Error";
         try {
             //weather task
             dayWithSmallestTempSpread = new WeatherTableInteractor()
@@ -27,7 +28,10 @@ public final class App {
                     ); // My day analysis function call …
 
             //football task
-            teamWithSmallestGoalSpread = "TODO"; // My goal analysis function call …
+            teamWithSmallestGoalSpread = new FootballTableInteractor()
+                    .processDataStructure(
+                            new CsvResourceTableDataProvider("de/exxcellent/challenge/swag.csv")
+                    );// My goal analysis function call …
         } catch (Exception x){
             x.printStackTrace();
         }

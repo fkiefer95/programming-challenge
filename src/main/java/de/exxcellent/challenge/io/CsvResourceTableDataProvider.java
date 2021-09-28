@@ -28,7 +28,7 @@ public class CsvResourceTableDataProvider implements TableDataProvider {
     @Override
     public Stream<String> getInputData() throws Exception {
         InputStream inputStream = App.class.getClassLoader().getResourceAsStream(this.resourceID); //open desired file as input stream
-        if(inputStream.available() == 0){ //check whether file is readable and not empty
+        if(inputStream == null || inputStream.available() == 0){ //check whether file is readable and not empty
             throw new Exception("Cannot read input file");
         }
         return new BufferedReader(new InputStreamReader(inputStream, Charset.defaultCharset())).lines().skip(1); // read file line by line and return a stream of read lines

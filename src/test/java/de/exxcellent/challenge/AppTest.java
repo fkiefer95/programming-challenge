@@ -6,7 +6,6 @@ import de.exxcellent.challenge.dataModels.TableDataModel;
 import de.exxcellent.challenge.dataModels.WeatherLineDataModel;
 import de.exxcellent.challenge.io.CsvResourceTableDataProvider;
 import de.exxcellent.challenge.io.TableDataProvider;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -37,10 +36,10 @@ class AppTest {
         assertEquals("successful", successLabel, "My expectations were not met");
     }
 
-    /**@Test
+    @Test
     void runFootball() {
         App.main("--football", "football.csv");
-    }**/
+    }
 
     @Test
     void testWeatherValueCondition(){
