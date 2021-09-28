@@ -74,7 +74,6 @@ class AppTest {
         boolean exception_thrown = false;
         WeatherTableInteractor weatherTableInteractor = new WeatherTableInteractor();
         ArrayList<String> testInput = new ArrayList<>();
-        //testInput.add("skip"); // replacement for the headers in the csv-file
         testInput.add("1.0,3.0,3.5,4.0,5.0");
         testInput.add("6.0,8.0,7.0,9.0,10.0");
         TableDataProvider testProvider = new TableDataProvider() {
