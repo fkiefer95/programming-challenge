@@ -1,7 +1,10 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.applicationLogic.interactors.FootballTableInteractor;
 import de.exxcellent.challenge.applicationLogic.interactors.WeatherTableInteractor;
+import de.exxcellent.challenge.applicationLogic.mathUtils.FootballValueCondition;
 import de.exxcellent.challenge.applicationLogic.mathUtils.WeatherValueCondition;
+import de.exxcellent.challenge.dataModels.FootballLineDataModel;
 import de.exxcellent.challenge.dataModels.TableDataModel;
 import de.exxcellent.challenge.dataModels.WeatherLineDataModel;
 import de.exxcellent.challenge.io.CsvResourceTableDataProvider;
@@ -56,8 +59,10 @@ class AppTest {
         //run tests
         boolean firstTestDone = false;
         try {
+            //test with valid data
             assertEquals("1", weatherValueConditionTestCandidate.computeResult(tableModel), "Result incorrect");
             firstTestDone = true;
+            //test with invalid data
             assertThrows(Exception.class, new Executable() {
                 @Override
                 public void execute() throws Throwable {
@@ -105,8 +110,56 @@ class AppTest {
             x.printStackTrace();
             fail("Exception caught in Interactor");
         }
+    }
 
+    @Test
+    void testFootballValueCondition(){
+        //create valid & invalid test data
+        int[] data = {38,26,9,3,79,36,87};
+        int[] invalidData = {1,2,3};
+        FootballLineDataModel[] model = {new FootballLineDataModel(data,"GoodTeam")};
+        FootballLineDataModel[] invalidModel = {new FootballLineDataModel(invalidData, "BadTeam")};
+        TableDataModel<FootballLineDataModel> table = new TableDataModel<FootballLineDataModel>(model);
+        TableDataModel<FootballLineDataModel> invalidTable = new TableDataModel<FootballLineDataModel>(invalidModel);
+        FootballValueCondition footballValueConditionTestCandidate = new FootballValueCondition();
+        //run test for valid & invalid data
+        //run tests
+        boolean firstTestDone = false;
+        try {
+            assertEquals("GoodTeam", footballValueConditionTestCandidate.computeResult(table), "Result incorrect");
+            firstTestDone = true;
+            assertThrows(Exception.class, new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    footballValueConditionTestCandidate.computeResult(invalidTable);
+                }
+            },"Exception for invalid football data was not thrown");
+        } catch (Exception x){
+            if(!firstTestDone) {
+                x.printStackTrace();
+                fail("Exception thrown in FootballValueCondition");
+            }
+        }
+    }
 
-
+    @Test
+    void testFootballTableInteractor(){
+        boolean exception_thrown = false;
+        FootballTableInteractor footballTableInteractor = new FootballTableInteractor();
+        ArrayList<String> testInput = new ArrayList<>();
+        testInput.add("Arsenal,38,26,9,3,79,36,87");
+        testInput.add("Liverpool,38,24,8,6,67,30,80");
+        TableDataProvider testProvider = new TableDataProvider() {
+            @Override
+            public Stream<String> getInputData() throws Exception {
+                return testInput.stream();
+            }
+        };
+        try{
+            assertEquals(footballTableInteractor.processDataStructure(testProvider),"Liverpool", "Wrong answer returned") ;
+        } catch(Exception x){
+            x.printStackTrace();
+            fail("Exception caught in Interactor");
+        }
     }
 }
